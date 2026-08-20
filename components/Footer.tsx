@@ -5,7 +5,10 @@ import { MapPin, Phone, Mail, MessageSquare, Clock, HeartHandshake } from 'lucid
 export default async function Footer() {
   const settings = await getBusinessSettings()
   const cleanPhone = (settings.phone || '').replace(/[^0-9+]/g, '')
-  const cleanWA = (settings.whatsapp_number || '').replace(/[^0-9]/g, '')
+  let cleanWA = (settings.whatsapp_number || '').replace(/[^0-9]/g, '')
+  if (cleanWA.length === 10) {
+    cleanWA = '91' + cleanWA
+  }
   const waUrl = cleanWA
     ? `https://wa.me/${cleanWA}?text=${encodeURIComponent('Hi MaaShine, I would like to inquire about cleaning services in Mysore.')}`
     : 'https://wa.me/?text=Hi%20MaaShine'

@@ -21,7 +21,10 @@ export default function StaffJobExecution({ assignment, staffName = 'MaaShine St
   const service = req?.services as any
 
   const cleanPhone = (profile?.phone || '').replace(/[^0-9+]/g, '')
-  const cleanWA = (profile?.phone || '').replace(/[^0-9]/g, '')
+  let cleanWA = (profile?.phone || '').replace(/[^0-9]/g, '')
+  if (cleanWA.length === 10) {
+    cleanWA = '91' + cleanWA
+  }
   
   const customerName = profile?.full_name || 'Customer'
   const serviceName = service?.name || 'Cleaning Service'

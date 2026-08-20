@@ -118,7 +118,10 @@ export default function RequestsList({ initialRequests, staffMembers = [] }: Req
             const isQuote = req.is_quote_request || service?.pricing_type === 'quote'
             
             const cleanPhone = (profile?.phone || '').replace(/[^0-9+]/g, '')
-            const cleanWA = (profile?.phone || '').replace(/[^0-9]/g, '')
+            let cleanWA = (profile?.phone || '').replace(/[^0-9]/g, '')
+            if (cleanWA.length === 10) {
+              cleanWA = '91' + cleanWA
+            }
             const customerName = profile?.full_name || 'Customer'
             const serviceName = service?.name || 'Cleaning Service'
             

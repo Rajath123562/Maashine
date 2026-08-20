@@ -84,7 +84,10 @@ export default async function AdminCalendarPage() {
                     const cleanerName = assignment?.staff?.full_name
 
                     const cleanPhone = (profile?.phone || '').replace(/[^0-9+]/g, '')
-                    const cleanWA = (profile?.phone || '').replace(/[^0-9]/g, '')
+                    let cleanWA = (profile?.phone || '').replace(/[^0-9]/g, '')
+                    if (cleanWA.length === 10) {
+                      cleanWA = '91' + cleanWA
+                    }
                     const waMessage = encodeURIComponent(
                       `Hi ${profile?.full_name || 'Customer'}, MaaShine reminder for your ${service?.name} on ${req.preferred_date} at ${req.preferred_time}.`
                     )

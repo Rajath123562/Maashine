@@ -27,11 +27,11 @@ export async function getBusinessSettings() {
     // Return sensible defaults if database doesn't have the row yet (or hasn't been migrated)
     return {
       business_name: 'MaaShine Cleaning Services',
-      phone: '+91 0000000000',
-      email: 'contact@maashineservices.com',
-      whatsapp_number: '+91 0000000000',
-      upi_id: 'yourbusiness@upi',
-      address: 'Mysore, Karnataka',
+      phone: '+91 81056 99620',
+      email: 'rajath.raj2569@gmail.com',
+      whatsapp_number: '+91 81056 99620',
+      upi_id: '8105699620@upi',
+      address: '#610, 8th Main, 12th Cross, Near Hemavathi School, Mysore, Karnataka',
       operating_hours: 'Mon-Sat, 9AM to 6PM'
     }
   }

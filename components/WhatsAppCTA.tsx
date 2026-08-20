@@ -12,7 +12,7 @@ interface WhatsAppCTAProps {
 }
 
 export default function WhatsAppCTA({
-  phoneNumber = '+91 0000000000',
+  phoneNumber = '+91 81056 99620',
   message,
   variant = 'primary',
   label,
@@ -20,7 +20,10 @@ export default function WhatsAppCTA({
   serviceName
 }: WhatsAppCTAProps) {
   // Clean phone number for WhatsApp link (digits only, e.g. 918105699620)
-  const cleanNumber = (phoneNumber || '').replace(/[^0-9]/g, '')
+  let cleanNumber = (phoneNumber || '').replace(/[^0-9]/g, '')
+  if (cleanNumber.length === 10) {
+    cleanNumber = '91' + cleanNumber
+  }
 
   // Generate appropriate pre-filled message
   const defaultMessage = serviceName
