@@ -1,7 +1,7 @@
 import { createClient } from '../../lib/supabase/server'
 import Link from 'next/link'
 import { requireAdmin } from '../../../lib/requireAdmin'
-import { Calendar, Clock, CreditCard, CheckCircle2, AlertCircle, Users, ArrowRight, Sparkles } from 'lucide-react'
+import { Calendar, Clock, CreditCard, CheckCircle2, AlertCircle, Users, ArrowRight, Sparkles, MessageSquare, Mail, Phone } from 'lucide-react'
 
 export default async function AdminDashboard() {
   await requireAdmin()
@@ -13,12 +13,14 @@ export default async function AdminDashboard() {
     { count: totalCustomers },
     { data: allRequests },
     { data: payments },
-    { count: pendingReschedules }
+    { count: pendingReschedules },
+    { data: contactMessages }
   ] = await Promise.all([
     supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('role', 'customer'),
     supabase.from('cleaning_requests').select('id, request_number, status, preferred_date, preferred_time, created_at, profiles(full_name), services(name)').order('created_at', { ascending: false }),
     supabase.from('payments').select('id, amount, status, created_at, profiles(full_name)').order('created_at', { ascending: false }),
-    supabase.from('reschedule_requests').select('*', { count: 'exact', head: true }).eq('status', 'pending')
+    supabase.from('reschedule_requests').select('*', { count: 'exact', head: true }).eq('status', 'pending'),
+    supabase.from('contact_messages').select('*').order('created_at', { ascending: false }).limit(6)
   ])
 
   const requests = allRequests || []
@@ -32,6 +34,7 @@ export default async function AdminDashboard() {
   const pendingPayments = allPayments.filter(p => p.status === 'Verification Pending')
   const verifiedPayments = allPayments.filter(p => p.status === 'Paid')
   const totalRevenue = verifiedPayments.reduce((sum, p) => sum + Number(p.amount || 0), 0)
+  const messages = contactMessages || []
 
   return (
     <div className="p-4 sm:p-6 md:p-10 max-w-7xl mx-auto space-y-8">
@@ -40,7 +43,7 @@ export default async function AdminDashboard() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-ink tracking-tight">Admin Operations</h1>
-          <p className="text-sage text-sm sm:text-base mt-1">Real-time status of MaaShine cleaning jobs and payments in Mysore.</p>
+          <p className="text-sage text-sm sm:text-base mt-1">Real-time status of MaaShine cleaning jobs, inquiries, and payments in Mysore.</p>
         </div>
         <div className="flex items-center gap-3">
           <Link
@@ -184,37 +187,41 @@ export default async function AdminDashboard() {
           </div>
         </section>
 
-        {/* Recent Payments Feed */}
+        {/* Customer Contact Inquiries Feed */}
         <section className="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 space-y-4">
           <div className="flex justify-between items-center pb-3 border-b border-slate-100">
-            <h2 className="text-lg font-bold text-ink">Recent Payments</h2>
-            <Link href="/admin/payments" className="text-teal font-bold hover:underline text-xs">
-              View All →
-            </Link>
+            <div className="flex items-center gap-2">
+              <MessageSquare size={18} className="text-teal" />
+              <h2 className="text-lg font-bold text-ink">Customer Inquiries</h2>
+            </div>
+            <span className="text-xs font-bold text-slate-400">Website Messages</span>
           </div>
 
           <div className="space-y-3">
-            {allPayments.length === 0 ? (
-              <p className="text-xs text-slate-400 text-center py-6">No payments recorded yet.</p>
+            {messages.length === 0 ? (
+              <p className="text-xs text-slate-400 text-center py-6">No customer inquiries received yet.</p>
             ) : (
-              allPayments.slice(0, 5).map((p: any) => {
-                const profile = p.profiles as any
-                return (
-                  <div key={p.id} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-between">
+              messages.map((m: any) => (
+                <div key={m.id} className="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+                  <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-extrabold text-ink">₹{Number(p.amount).toLocaleString('en-IN')}</p>
-                      <p className="text-xs text-slate-500">{profile?.full_name || 'Customer'}</p>
+                      <h4 className="text-sm font-bold text-ink">{m.name}</h4>
+                      <p className="text-[11px] text-slate-400">{new Date(m.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</p>
                     </div>
-                    <span className={`text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-lg ${
-                      p.status === 'Paid' ? 'bg-lime/20 text-teal' :
-                      p.status === 'Verification Pending' ? 'bg-marigold/20 text-marigold' :
-                      'bg-red-50 text-red-500'
-                    }`}>
-                      {p.status}
-                    </span>
+                    <a
+                      href={`mailto:${m.email}`}
+                      className="inline-flex items-center gap-1 text-xs font-bold text-teal bg-teal/10 hover:bg-teal/20 px-2.5 py-1 rounded-lg transition-colors"
+                    >
+                      <Mail size={12} />
+                      <span>Reply</span>
+                    </a>
                   </div>
-                )
-              })
+                  <p className="text-xs text-slate-700 bg-white p-2.5 rounded-xl border border-slate-100 italic">
+                    "{m.message}"
+                  </p>
+                  <p className="text-[11px] text-teal font-semibold">{m.email}</p>
+                </div>
+              ))
             )}
           </div>
         </section>
