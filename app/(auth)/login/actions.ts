@@ -14,7 +14,7 @@ export async function login(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword(data)
 
   if (error) {
-    redirect('/login?error=Could not authenticate user')
+    redirect(`/login?error=${encodeURIComponent(error.message)}`)
   }
 
   revalidatePath('/', 'layout')
@@ -23,32 +23,44 @@ export async function login(formData: FormData) {
 
 export async function signup(formData: FormData) {
   const supabase = await createClient()
-  const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
+  const full_name = (formData.get('full_name') as string)?.trim() || 'Customer'
+  const email = (formData.get('email') as string)?.trim().toLowerCase()
+  const phone = (formData.get('phone') as string)?.trim()
+  const password = formData.get('password') as string
+
+  if (!email || !password || !phone) {
+    redirect('/register?error=Please%20fill%20in%20all%20required%20fields')
+  }
+
+  const { error, data: authData } = await supabase.auth.signUp({
+    email,
+    password,
     options: {
       data: {
-        full_name: formData.get('full_name') as string,
-        phone: formData.get('phone') as string,
+        full_name,
+        phone,
       }
     }
-  }
-
-  const { error, data: authData } = await supabase.auth.signUp(data)
+  })
 
   if (error) {
-    redirect('/register?error=Could not create user')
+    redirect(`/register?error=${encodeURIComponent(error.message)}`)
   }
 
-  // Insert profile since auth.signUp options.data might not trigger immediately via trigger in our basic setup
+  // Insert or update profile
   if (authData.user) {
-      await supabase.from('profiles').insert({
-          id: authData.user.id,
-          full_name: data.options.data.full_name,
-          email: data.email,
-          phone: data.options.data.phone,
-          role: 'customer'
-      })
+    await supabase.from('profiles').upsert({
+      id: authData.user.id,
+      full_name,
+      email,
+      phone,
+      role: 'customer'
+    })
+  }
+
+  // If email verification is active on Supabase project, notify the user
+  if (authData.user && !authData.session) {
+    redirect('/login?message=Registration%20successful!%20Please%20log%20in%20to%20your%20account.')
   }
 
   revalidatePath('/', 'layout')

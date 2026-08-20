@@ -1,7 +1,7 @@
 import { login } from './actions';
 import Link from 'next/link';
 
-export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string; message?: string }> }) {
   const resolvedSearchParams = await searchParams;
 
   return (
@@ -9,6 +9,12 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-sage/20">
         <h1 className="text-3xl font-extrabold text-ink text-center mb-6">Welcome Back</h1>
         <p className="text-sage text-center mb-8">Log in to your MaaShine account</p>
+
+        {resolvedSearchParams?.message && (
+          <div className="bg-teal/10 border border-teal/30 text-teal p-4 rounded-xl mb-6 text-sm font-semibold text-center">
+            {resolvedSearchParams.message}
+          </div>
+        )}
 
         {resolvedSearchParams?.error && (
           <div className="bg-red-50 text-red-500 p-4 rounded-xl mb-6 text-sm font-semibold text-center">

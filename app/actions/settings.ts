@@ -36,7 +36,16 @@ export async function getBusinessSettings() {
     }
   }
 
-  return data
+  // If the database still holds initial placeholder zeros, use the active business number
+  const isPlaceholderPhone = !data.phone || data.phone.includes('0000000000')
+  const isPlaceholderWA = !data.whatsapp_number || data.whatsapp_number.includes('0000000000')
+
+  return {
+    ...data,
+    phone: isPlaceholderPhone ? '+91 81056 99620' : data.phone,
+    whatsapp_number: isPlaceholderWA ? '+91 81056 99620' : data.whatsapp_number,
+    upi_id: data.upi_id === 'yourbusiness@upi' ? '8105699620@upi' : data.upi_id
+  }
 }
 
 export async function updateBusinessSettings(formData: z.infer<typeof SettingsSchema>) {
