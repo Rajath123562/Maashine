@@ -1,5 +1,6 @@
 import { signup } from '../login/actions';
 import Link from 'next/link';
+import GoogleSignInButton from '../../../components/GoogleSignInButton';
 
 export default async function RegisterPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const resolvedSearchParams = await searchParams;
@@ -15,6 +16,20 @@ export default async function RegisterPage({ searchParams }: { searchParams: Pro
             {resolvedSearchParams.error}
           </div>
         )}
+
+        {/* 1-Click Google Sign Up */}
+        <div className="mb-6">
+          <GoogleSignInButton label="Sign up with Google" />
+          
+          <div className="relative my-6 text-center">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-slate-200" />
+            </div>
+            <span className="relative bg-white px-3 text-xs font-bold text-slate-400 uppercase tracking-wider">
+              Or with email
+            </span>
+          </div>
+        </div>
         
         <form action={signup} className="flex flex-col gap-4">
           <div>
