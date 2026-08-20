@@ -17,9 +17,12 @@ export async function GET(request: Request) {
       const email = user.email || ''
       const phone = user.user_metadata?.phone || ''
 
+      const isAdminEmail = email.toLowerCase() === 'rajath.raj2569@gmail.com'
+      const assignedRole = isAdminEmail ? 'admin' : 'customer'
+
       const { data: existingProfile } = await supabase
         .from('profiles')
-        .select('id')
+        .select('id, role')
         .eq('id', user.id)
         .maybeSingle()
 
@@ -29,11 +32,14 @@ export async function GET(request: Request) {
           full_name: fullName,
           email: email,
           phone: phone,
-          role: 'customer'
+          role: assignedRole
         })
+      } else if (isAdminEmail && existingProfile.role !== 'admin') {
+        await supabase.from('profiles').update({ role: 'admin' }).eq('id', user.id)
       }
 
-      return NextResponse.redirect(`${origin}${next}`)
+      const redirectPath = isAdminEmail ? '/admin' : next
+      return NextResponse.redirect(`${origin}${redirectPath}`)
     }
   }
 

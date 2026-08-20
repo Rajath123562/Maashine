@@ -12,7 +12,7 @@ interface WhatsAppCTAProps {
 }
 
 export default function WhatsAppCTA({
-  phoneNumber = '+91 81056 99620',
+  phoneNumber = '+91 99168 87855',
   message,
   variant = 'primary',
   label,

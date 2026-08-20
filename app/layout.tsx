@@ -98,8 +98,8 @@ const jsonLd = {
   "name": "MaaShine Cleaning Services",
   "image": "https://maashineservices.com/og-image.jpg",
   "url": "https://maashineservices.com",
-  "telephone": "+91-8105699620",
-  "email": "contact@maashineservices.com",
+  "telephone": "+91-9916887855",
+  "email": "rajath.raj2569@gmail.com",
   "priceRange": "₹₹",
   "address": {
     "@type": "PostalAddress",

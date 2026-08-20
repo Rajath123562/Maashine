@@ -10,7 +10,7 @@ interface PhoneCTAProps {
 }
 
 export default function PhoneCTA({
-  phoneNumber = '+91 81056 99620',
+  phoneNumber = '+91 99168 87855',
   variant = 'secondary',
   label,
   className = ''

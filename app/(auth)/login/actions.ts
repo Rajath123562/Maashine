@@ -18,7 +18,8 @@ export async function login(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect('/dashboard')
+  const isAdmin = (data.email || '').trim().toLowerCase() === 'rajath.raj2569@gmail.com'
+  redirect(isAdmin ? '/admin' : '/dashboard')
 }
 
 export async function signup(formData: FormData) {
@@ -47,6 +48,8 @@ export async function signup(formData: FormData) {
     redirect(`/register?error=${encodeURIComponent(error.message)}`)
   }
 
+  const isAdmin = email === 'rajath.raj2569@gmail.com'
+
   // Insert or update profile
   if (authData.user) {
     await supabase.from('profiles').upsert({
@@ -54,7 +57,7 @@ export async function signup(formData: FormData) {
       full_name,
       email,
       phone,
-      role: 'customer'
+      role: isAdmin ? 'admin' : 'customer'
     })
   }
 
@@ -64,7 +67,7 @@ export async function signup(formData: FormData) {
   }
 
   revalidatePath('/', 'layout')
-  redirect('/dashboard')
+  redirect(isAdmin ? '/admin' : '/dashboard')
 }
 
 export async function resetPassword(formData: FormData) {

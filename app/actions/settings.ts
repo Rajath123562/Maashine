@@ -27,24 +27,24 @@ export async function getBusinessSettings() {
     // Return sensible defaults if database doesn't have the row yet (or hasn't been migrated)
     return {
       business_name: 'MaaShine Cleaning Services',
-      phone: '+91 81056 99620',
+      phone: '+91 99168 87855',
       email: 'rajath.raj2569@gmail.com',
-      whatsapp_number: '+91 81056 99620',
-      upi_id: '8105699620@upi',
+      whatsapp_number: '+91 99168 87855',
+      upi_id: '9916887855@upi',
       address: '#610, 8th Main, 12th Cross, Near Hemavathi School, Mysore, Karnataka',
       operating_hours: 'Mon-Sat, 9AM to 6PM'
     }
   }
 
   // If the database still holds initial placeholder zeros, use the active business number
-  const isPlaceholderPhone = !data.phone || data.phone.includes('0000000000')
-  const isPlaceholderWA = !data.whatsapp_number || data.whatsapp_number.includes('0000000000')
+  const isPlaceholderPhone = !data.phone || data.phone.includes('0000000000') || data.phone.includes('8105699620')
+  const isPlaceholderWA = !data.whatsapp_number || data.whatsapp_number.includes('0000000000') || data.whatsapp_number.includes('8105699620')
 
   return {
     ...data,
-    phone: isPlaceholderPhone ? '+91 81056 99620' : data.phone,
-    whatsapp_number: isPlaceholderWA ? '+91 81056 99620' : data.whatsapp_number,
-    upi_id: data.upi_id === 'yourbusiness@upi' ? '8105699620@upi' : data.upi_id
+    phone: isPlaceholderPhone ? '+91 99168 87855' : data.phone,
+    whatsapp_number: isPlaceholderWA ? '+91 99168 87855' : data.whatsapp_number,
+    upi_id: data.upi_id === 'yourbusiness@upi' || data.upi_id === '8105699620@upi' ? '9916887855@upi' : data.upi_id
   }
 }
 
