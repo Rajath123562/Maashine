@@ -1,0 +1,30 @@
+# MaaShine — Cursor Rules & Codebase Guidelines
+
+## Framework & Tooling
+- **Framework**: Next.js 16+ (App Router)
+- **Language**: TypeScript (strict mode)
+- **Styling**: Tailwind CSS v4 with custom design tokens
+- **Database & Auth**: Supabase (@supabase/ssr, PostgreSQL)
+- **Icons**: Lucide React (`lucide-react`)
+
+## Codebase Principles
+1. **Next.js 15+ Server Components**: Default to Server Components (`page.tsx`, `layout.tsx`). Use `'use client'` only for interactive components (forms, toggles, client state).
+2. **Asynchronous APIs**: `cookies()`, `headers()`, and `params` / `searchParams` in Next.js 15+ are Promises and MUST be `await`-ed.
+3. **Database Security**: Never bypass Row Level Security (RLS) on customer-facing routes. Use `createClient()` from `@/app/lib/supabase/server`. Use `SUPABASE_SERVICE_ROLE_KEY` ONLY in admin server actions and system endpoints (e.g., `/api/seed`).
+4. **Data Isolation**: Customers must NEVER be able to query or view other customers' data. Always scope database queries with `.eq('customer_id', user.id)` or RLS policies.
+5. **Centralized Data**: All pricing and service information MUST come from the database `services` table. Never hardcode pricing or service details in multiple components.
+
+## UI & Design Guidelines
+- **Color Palette**:
+  - Teal: `#0d9488` (`var(--color-teal)`)
+  - Lime: `#a3e635` (`var(--color-lime)`)
+  - Marigold: `#fbbf24` (`var(--color-marigold)`)
+  - Sage: `#9ca3af` (`var(--color-sage)`)
+  - Linen: `#fdf8f6` (`var(--color-linen)`)
+  - Ink: `#1e293b` (`var(--color-ink)`)
+- **Typography**: `Bricolage Grotesque` for headers/body, `IBM Plex Mono` for tags/labels.
+- **Animations**: Use Tailwind CSS keyframes (`animate-in`, `fade-in`, `slide-in-from-bottom-2`). Avoid `framer-motion` inside client forms to prevent opacity hydration bugs.
+
+## Error Handling & Loading States
+- Every server action MUST catch errors and return structured `{ success: boolean, error?: string }` objects.
+- Disable submit buttons during form submission (`disabled={loading}`) to prevent double-submissions.

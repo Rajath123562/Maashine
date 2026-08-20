@@ -1,0 +1,44 @@
+{
+  "name": "maashine-services",
+  "version": "1.0.0",
+  "description": "MaaShine Services Next.js App",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "tsc --noEmit",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@ducanh2912/next-pwa": "latest",
+    "@hookform/resolvers": "latest",
+    "@supabase/ssr": "latest",
+    "@supabase/supabase-js": "^2.0.0",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.38.2",
+    "clsx": "latest",
+    "framer-motion": "^13.1.0",
+    "lucide-react": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-hook-form": "latest",
+    "resend": "^6.20.0",
+    "tailwind-merge": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "latest",
+    "@types/jest": "^29.0.0",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "autoprefixer": "latest",
+    "jest": "^29.0.0",
+    "postcss": "latest",
+    "tailwindcss": "latest",
+    "ts-jest": "^29.0.0",
+    "typescript": "^5.0.0"
+  }
+}
