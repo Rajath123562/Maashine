@@ -1,6 +1,6 @@
 import { createClient } from '../../../lib/supabase/server'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import CancelBookingButton from '../../../../components/CancelBookingButton'
 import RescheduleBookingButton from '../../../../components/RescheduleBookingButton'
 import ReviewForm from '../../../../components/ReviewForm'
@@ -22,7 +22,20 @@ export default async function RequestDetails({ params }: { params: Promise<{ id:
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  const { data: req } = await supabase
+  if (!user) {
+    redirect(`/login?next=/my-requests/${id}`)
+  }
+
+  // Check if admin user
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', user.id)
+    .maybeSingle()
+
+  const isAdmin = profile?.role === 'admin'
+
+  let query = supabase
     .from('cleaning_requests')
     .select(`
       *, 
@@ -32,8 +45,13 @@ export default async function RequestDetails({ params }: { params: Promise<{ id:
       reviews(id, rating, comment, created_at)
     `)
     .eq('id', id)
-    .eq('customer_id', user?.id)
-    .single()
+
+  // If not admin, restrict to customer's own booking
+  if (!isAdmin) {
+    query = query.eq('customer_id', user.id)
+  }
+
+  const { data: req } = await query.maybeSingle()
 
   if (!req) return notFound()
 
@@ -50,8 +68,8 @@ export default async function RequestDetails({ params }: { params: Promise<{ id:
   return (
     <main className="min-h-screen bg-linen p-4 md:p-8">
       <div className="max-w-5xl mx-auto">
-        <Link href="/dashboard" className="text-teal font-bold hover:underline mb-8 inline-block">
-          ← Back to Dashboard
+        <Link href={isAdmin ? "/admin/requests" : "/dashboard"} className="text-teal font-bold hover:underline mb-8 inline-block">
+          ← {isAdmin ? "Back to Admin Requests" : "Back to Dashboard"}
         </Link>
         
         <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-sage/20">
