@@ -4,12 +4,14 @@ import { submitBookingRequest } from '../app/actions/booking';
 import { useRouter } from 'next/navigation';
 import { calculatePrice } from '../lib/pricing';
 import { createClient } from '../app/lib/supabase/client';
+import { Copy, Check, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export default function MultiStepBooking({ services, profile, businessSettings }: { services: any[], profile: any, businessSettings: any }) {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [copiedUPI, setCopiedUPI] = useState(false);
   
   // Form State
   const [formData, setFormData] = useState({
@@ -316,7 +318,27 @@ export default function MultiStepBooking({ services, profile, businessSettings }
                     </div>
                   </div>
                   
-                  <div className="text-sm font-semibold text-ink">UPI ID: {businessSettings?.upi_id || 'yourbusiness@upi'}</div>
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">UPI ID</div>
+                    <div className="inline-flex items-center gap-2 bg-slate-100 p-2 px-4 rounded-xl border border-slate-200">
+                      <span className="font-mono font-extrabold text-ink text-sm">
+                        {businessSettings?.upi_id || '9916887855@upi'}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          navigator.clipboard.writeText(businessSettings?.upi_id || '9916887855@upi')
+                          setCopiedUPI(true)
+                          setTimeout(() => setCopiedUPI(false), 2500)
+                        }}
+                        className="inline-flex items-center gap-1 bg-teal text-white text-xs font-bold px-2.5 py-1 rounded-lg hover:bg-teal/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+                        aria-label="Copy UPI ID to clipboard"
+                      >
+                        {copiedUPI ? <Check size={13} /> : <Copy size={13} />}
+                        <span>{copiedUPI ? 'Copied!' : 'Copy'}</span>
+                      </button>
+                    </div>
+                  </div>
 
                   <div className="border-t border-sage/20 pt-6 space-y-4 text-left">
                     <h4 className="font-bold text-ink text-center">After completing payment:</h4>

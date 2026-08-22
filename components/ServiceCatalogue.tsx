@@ -72,13 +72,13 @@ export default function ServiceCatalogue({ services }: { services: any[] }) {
               <div className="flex flex-col gap-2 items-end">
                 <Link 
                   href={`/services/${service.slug}`}
-                  className="text-teal font-bold text-sm hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal rounded"
+                  className="text-slate-500 hover:text-teal font-bold text-xs hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal rounded"
                 >
-                  View Details
+                  View Full Checklist →
                 </Link>
                 <Link 
                   href={`/booking`}
-                  className="bg-lime text-ink font-bold px-6 py-3 rounded-full hover:bg-marigold transition-colors shadow-sm text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+                  className="bg-teal text-white font-bold px-6 py-2.5 rounded-full hover:bg-teal/90 transition-all shadow-md text-xs sm:text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
                 >
                   {service.pricing_type === 'quote' ? 'Get Quote' : 'Book Now'}
                 </Link>

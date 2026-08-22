@@ -47,8 +47,14 @@ export default function Navbar({ user, profile }: { user: any, profile: any }) {
             {user ? (
               <div className="flex items-center gap-3">
                 <Link
+                  href="/booking"
+                  className="bg-teal text-white font-bold px-5 py-2 rounded-full hover:bg-teal/90 transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal text-xs uppercase tracking-wider"
+                >
+                  Book Slot
+                </Link>
+                <Link
                   href={profile?.role === 'admin' ? '/admin' : '/dashboard'}
-                  className="bg-teal text-white font-bold px-6 py-2.5 rounded-full hover:bg-teal/90 transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+                  className="bg-linen text-ink border border-slate-200 font-bold px-5 py-2 rounded-full hover:bg-white transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal text-sm"
                 >
                   Dashboard
                 </Link>
@@ -72,10 +78,10 @@ export default function Navbar({ user, profile }: { user: any, profile: any }) {
                   Log in
                 </Link>
                 <Link
-                  href="/register"
-                  className="bg-lime text-ink font-bold px-6 py-2.5 rounded-full hover:bg-marigold transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+                  href="/booking"
+                  className="bg-teal text-white font-bold px-5 py-2.5 rounded-full hover:bg-teal/90 transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal text-sm"
                 >
-                  Sign Up
+                  Book Now
                 </Link>
               </div>
             )}

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Sparkles, ShieldCheck, Clock, MapPin, CheckCircle2, Star, MessageSquare } from 'lucide-react'
+import { Sparkles, ShieldCheck, Clock, MapPin, CheckCircle2, Star, HeartHandshake, CheckSquare, Layers, Phone } from 'lucide-react'
 import { getBusinessSettings } from './actions/settings'
 import { createClient } from './lib/supabase/server'
 import WhatsAppCTA from '../components/WhatsAppCTA'
@@ -7,6 +7,9 @@ import PhoneCTA from '../components/PhoneCTA'
 import ServiceAreas from '../components/ServiceAreas'
 import ShareMaaShine from '../components/ShareMaaShine'
 import FAQ from '../components/FAQ'
+import BeforeAfterSlider from '../components/BeforeAfterSlider'
+import LocalitySearch from '../components/LocalitySearch'
+import ChecklistExplorer from '../components/ChecklistExplorer'
 import { FAQ_ITEMS } from '../lib/faqData'
 
 export default async function HomePage() {
@@ -47,31 +50,36 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
+
       {/* Hero Section */}
-      <section className="bg-linen pt-16 pb-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-teal via-linen to-linen pointer-events-none" />
-        <div className="max-w-7xl mx-auto relative text-center">
+      <section className="bg-linen pt-12 sm:pt-16 pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-15 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-teal via-linen to-linen pointer-events-none" />
+        
+        <div className="max-w-6xl mx-auto relative text-center">
           
-          {/* Local Trust Badge */}
-          <div className="inline-flex items-center gap-2 bg-teal/10 text-teal px-4 py-1.5 rounded-full text-xs sm:text-sm font-extrabold mb-6 border border-teal/20">
-            <MapPin size={16} />
-            <span>Professional Cleaning Services in Mysore, Karnataka</span>
+          {/* Glowing Top Badge */}
+          <div className="inline-flex items-center gap-2 bg-teal/10 hover:bg-teal/15 text-teal px-4 py-2 rounded-full text-xs sm:text-sm font-extrabold mb-6 border border-teal/30 shadow-xs transition-all backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
+            <MapPin size={15} />
+            <span>Mysore's #1 Dedicated Cleaning Team</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-ink tracking-tight mb-6 leading-tight">
-            A Cleaner Space.<br className="hidden sm:block" /> A Better Life in <span className="text-teal">Mysore</span>.
+            A Cleaner Space.<br className="hidden sm:block" /> A Better Life in <span className="text-teal underline decoration-lime decoration-wavy decoration-2">Mysore</span>.
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-sage mb-10 max-w-3xl mx-auto font-medium leading-relaxed">
-            Expert home deep cleaning, kitchen degreasing, bathroom sanitization, sofa care, and office cleaning with 100% transparent upfront pricing.
+          
+          <p className="text-base sm:text-xl md:text-2xl text-sage mb-10 max-w-3xl mx-auto font-medium leading-relaxed">
+            Professional home deep cleaning, kitchen degreasing, bathroom descaling, and sofa care with <strong className="text-ink">100% upfront transparent pricing</strong>.
           </p>
 
           {/* Primary Action Buttons */}
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-xl mx-auto">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-xl mx-auto mb-14">
             <Link
               href="/booking"
-              className="w-full sm:w-auto bg-teal text-white font-bold px-10 py-4 rounded-full hover:bg-teal/90 transition-all shadow-lg hover:shadow-xl text-lg text-center"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-teal text-white font-bold px-10 py-4 rounded-full hover:bg-teal/90 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5 text-base sm:text-lg"
             >
-              Book a Cleaning
+              <Sparkles size={20} />
+              <span>Book a Cleaning</span>
             </Link>
             <WhatsAppCTA
               phoneNumber={businessSettings.whatsapp_number}
@@ -86,28 +94,47 @@ export default async function HomePage() {
             />
           </div>
 
-          {/* Quick Trust Highlights */}
-          <div className="flex flex-wrap justify-center items-center gap-6 mt-12 text-xs sm:text-sm font-semibold text-slate-600">
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 size={16} className="text-teal" />
-              <span>Upfront Pricing</span>
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 size={16} className="text-teal" />
-              <span>Trained Local Team</span>
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 size={16} className="text-teal" />
-              <span>Eco-Friendly Supplies</span>
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 size={16} className="text-teal" />
-              <span>Pay After Verification</span>
-            </span>
+          {/* Social Proof & Trust Counter Bar */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 bg-white/90 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-sage/20 shadow-xl max-w-4xl mx-auto">
+            <div className="text-center p-2">
+              <p className="text-2xl sm:text-3xl font-extrabold text-teal">500+</p>
+              <p className="text-xs sm:text-sm font-bold text-ink mt-0.5">Spaces Cleaned</p>
+              <p className="text-[11px] text-sage">Across Mysore</p>
+            </div>
+
+            <div className="text-center p-2 border-l border-slate-100">
+              <p className="text-2xl sm:text-3xl font-extrabold text-marigold flex items-center justify-center gap-1">
+                <span>4.9</span>
+                <Star size={20} className="fill-current text-marigold" />
+              </p>
+              <p className="text-xs sm:text-sm font-bold text-ink mt-0.5">Customer Rating</p>
+              <p className="text-[11px] text-sage">Verified Reviews</p>
+            </div>
+
+            <div className="text-center p-2 border-l border-slate-100">
+              <p className="text-2xl sm:text-3xl font-extrabold text-teal">50-Point</p>
+              <p className="text-xs sm:text-sm font-bold text-ink mt-0.5">Quality Checklist</p>
+              <p className="text-[11px] text-sage">Zero Compromise</p>
+            </div>
+
+            <div className="text-center p-2 border-l border-slate-100">
+              <p className="text-2xl sm:text-3xl font-extrabold text-lime-700">100%</p>
+              <p className="text-xs sm:text-sm font-bold text-ink mt-0.5">Eco-Friendly</p>
+              <p className="text-[11px] text-sage">Non-Toxic Supplies</p>
+            </div>
           </div>
 
         </div>
       </section>
+
+      {/* Interactive Before & After Transformation Slider */}
+      <BeforeAfterSlider />
+
+      {/* Interactive 50-Point Checklist Explorer */}
+      <ChecklistExplorer />
+
+      {/* Mysore Locality Live Availability Finder */}
+      <LocalitySearch />
 
       {/* How It Works */}
       <section className="bg-linen/50 py-20 sm:py-24 px-4 sm:px-6 lg:px-8 border-y border-sage/10">
@@ -158,23 +185,23 @@ export default async function HomePage() {
               <div className="bg-teal w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-white shadow-md">
                 <Sparkles size={28} />
               </div>
-              <h3 className="text-2xl font-bold text-ink mb-3">50-Point Quality Checklist</h3>
+              <h3 className="text-2xl font-bold text-ink mb-3">50-Point Standard</h3>
               <p className="text-sage text-sm sm:text-base leading-relaxed">
-                From corner to ceiling, our trained cleaners follow a rigorous 50-point cleaning protocol to ensure no spot is missed.
+                Structured protocols ensuring every corner, kitchen tile, and bathroom fixture is sanitized thoroughly.
               </p>
             </div>
             
-            <div className="bg-linen/50 p-8 rounded-3xl border border-sage/20 hover:border-marigold/50 transition-colors">
+            <div className="bg-linen/50 p-8 rounded-3xl border border-sage/20 hover:border-teal/50 transition-colors">
               <div className="bg-marigold w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-ink shadow-md">
                 <ShieldCheck size={28} />
               </div>
-              <h3 className="text-2xl font-bold text-ink mb-3">Trained & Vetted Staff</h3>
+              <h3 className="text-2xl font-bold text-ink mb-3">Vetted Professionals</h3>
               <p className="text-sage text-sm sm:text-base leading-relaxed">
-                Every MaaShine cleaning professional is background-checked, trained, and committed to treating your home with utmost care.
+                Background-checked, experienced local Mysore team committed to respect, safety, and care for your home.
               </p>
             </div>
             
-            <div className="bg-linen/50 p-8 rounded-3xl border border-sage/20 hover:border-lime/50 transition-colors">
+            <div className="bg-linen/50 p-8 rounded-3xl border border-sage/20 hover:border-teal/50 transition-colors">
               <div className="bg-lime w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-ink shadow-md">
                 <Clock size={28} />
               </div>
@@ -241,39 +268,10 @@ export default async function HomePage() {
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <ShareMaaShine
           title="MaaShine Cleaning Services | Mysore"
-          text="Looking for trusted home, kitchen, or deep cleaning in Mysore? Check out MaaShine Cleaning Services:"
+          text="I just used MaaShine for cleaning in Mysore and had a great experience! Highly recommend their service:"
         />
       </section>
 
-      {/* Final Call to Action */}
-      <section className="bg-teal py-20 px-4 sm:px-6 lg:px-8 text-center text-white">
-        <div className="max-w-4xl mx-auto space-y-6">
-          <h2 className="text-3xl sm:text-5xl font-extrabold">Ready for a Cleaner Home in Mysore?</h2>
-          <p className="text-lime text-lg sm:text-xl max-w-2xl mx-auto font-medium">
-            Book online in under 2 minutes or chat directly with our team on WhatsApp.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
-            <Link
-              href="/booking"
-              className="w-full sm:w-auto bg-lime text-ink font-bold px-10 py-4 rounded-full hover:bg-marigold transition-all shadow-lg text-lg"
-            >
-              Book a Cleaning Now
-            </Link>
-            <WhatsAppCTA
-              phoneNumber={businessSettings.whatsapp_number}
-              variant="secondary"
-              label="Inquire on WhatsApp"
-              className="w-full sm:w-auto"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Floating WhatsApp CTA */}
-      <WhatsAppCTA
-        phoneNumber={businessSettings.whatsapp_number}
-        variant="floating"
-      />
     </main>
   )
 }

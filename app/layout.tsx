@@ -3,6 +3,7 @@ import { Bricolage_Grotesque, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import NavbarWrapper from "../components/NavbarWrapper";
 import Footer from "../components/Footer";
+import MobileBottomBar from "../components/MobileBottomBar";
 
 const bricolage = Bricolage_Grotesque({ 
   subsets: ["latin"],
@@ -38,40 +39,35 @@ export const metadata: Metadata = {
     "office cleaning Mysore",
     "apartment cleaning Mysore",
     "floor cleaning Mysore",
-    "window glass cleaning Mysore"
+    "Gokulam cleaning services",
+    "Vijayanagar cleaning services",
+    "Kuvempunagar cleaning services",
+    "Jayalakshmipuram cleaning services",
+    "Mysore cleaning company"
   ],
   authors: [{ name: "MaaShine Cleaning Services" }],
-  creator: "MaaShine Cleaning Services",
-  publisher: "MaaShine Cleaning Services",
+  creator: "MaaShine",
+  publisher: "MaaShine",
   formatDetection: {
     email: false,
-    address: true,
-    telephone: true,
+    address: false,
+    telephone: false,
   },
   alternates: {
     canonical: siteUrl,
   },
   openGraph: {
-    title: "MaaShine | Professional Cleaning Services in Mysore",
-    description: "Expert home deep cleaning, kitchen, bathroom, and sofa cleaning in Mysore. Punctual, reliable, and transparent pricing.",
-    url: "https://maashineservices.com",
-    siteName: "MaaShine Cleaning Services",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "MaaShine Cleaning Services Mysore"
-      }
-    ],
-    locale: "en_IN",
     type: "website",
+    locale: "en_IN",
+    url: "https://maashineservices.com",
+    title: "MaaShine | Professional Cleaning Services in Mysore",
+    description: "Professional home deep cleaning, kitchen degreasing, bathroom sanitization, and sofa cleaning in Mysore, Karnataka.",
+    siteName: "MaaShine Cleaning Services",
   },
   twitter: {
     card: "summary_large_image",
     title: "MaaShine | Professional Cleaning Services in Mysore",
-    description: "Professional residential and commercial cleaning services across Mysore, Karnataka.",
-    images: ["/og-image.jpg"],
+    description: "Expert residential and commercial cleaning across Mysore with upfront transparent pricing.",
   },
   robots: {
     index: true,
@@ -83,12 +79,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "MaaShine",
   },
 };
 
@@ -114,23 +104,36 @@ const jsonLd = {
     "latitude": "12.2958",
     "longitude": "76.6394"
   },
-  "areaServed": [
-    {
-      "@type": "City",
-      "name": "Mysore"
-    },
-    {
-      "@type": "AdministrativeArea",
-      "name": "Karnataka"
-    }
-  ],
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
       "opens": "09:00",
       "closes": "18:00"
     }
+  ],
+  "areaServed": [
+    "Gokulam",
+    "Vijayanagar",
+    "Jayalakshmipuram",
+    "Kuvempunagar",
+    "VV Mohalla",
+    "Saraswathipuram",
+    "Hebbal",
+    "JP Nagar",
+    "Dattagalli",
+    "Bogadi",
+    "Yadavagiri",
+    "Siddhartha Layout",
+    "Ramakrishnanagar",
+    "Alanahalli"
   ],
   "sameAs": [
     "https://maashineservices.com"
@@ -150,12 +153,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${bricolage.variable} ${plexMono.variable} font-sans antialiased bg-linen text-ink min-h-screen flex flex-col`}>
+      <body className={`${bricolage.variable} ${plexMono.variable} font-sans antialiased bg-linen text-ink min-h-screen flex flex-col pb-16 md:pb-0`}>
         <NavbarWrapper />
         <div className="flex-1">
           {children}
         </div>
         <Footer />
+        <MobileBottomBar />
       </body>
     </html>
   );
