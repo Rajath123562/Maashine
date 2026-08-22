@@ -6,7 +6,8 @@ import WhatsAppCTA from '../components/WhatsAppCTA'
 import PhoneCTA from '../components/PhoneCTA'
 import ServiceAreas from '../components/ServiceAreas'
 import ShareMaaShine from '../components/ShareMaaShine'
-import FAQ, { FAQ_ITEMS } from '../components/FAQ'
+import FAQ from '../components/FAQ'
+import { FAQ_ITEMS } from '../lib/faqData'
 
 export default async function HomePage() {
   const businessSettings = await getBusinessSettings()
