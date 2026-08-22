@@ -24,7 +24,7 @@ Whether you need a full home deep-cleaning, sparkling kitchen degreasing, bathro
 👉 https://maashineservices.com
 
 💬 Or chat with us directly on WhatsApp:
-👉 https://wa.me/918105699620?text=Hi%20MaaShine,%20I%20would%20like%20to%20know%20more%20about%20your%20cleaning%20services
+👉 https://wa.me/919916887855?text=Hi%20MaaShine,%20I%20would%20like%20to%20know%20more%20about%20your%20cleaning%20services
 
 Please feel free to share this with friends or family moving into a new home or looking for dependable cleaning in Mysore! Thank you for your support! ❤️
 ```
@@ -93,7 +93,7 @@ Looking for a reliable, verified cleaning team for your apartment or villa?
 ✅ Official receipts & invoices
 
 🌐 Book online: https://maashineservices.com
-📞 Direct Contact / WhatsApp: +91 81056 99620
+📞 Direct Contact / WhatsApp: +91 99168 87855
 ```
 
 ---
@@ -115,7 +115,7 @@ A clean, sanitized workspace boosts productivity and creates a lasting impressio
 
 We provide official invoices and transparent quotes.
 
-📞 Call or WhatsApp us to schedule a walk-through: +91 81056 99620
+📞 Call or WhatsApp us to schedule a walk-through: +91 99168 87855
 🌐 Learn more: https://maashineservices.com/services/office-cleaning
 ```
 

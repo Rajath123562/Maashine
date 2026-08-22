@@ -63,8 +63,8 @@ export default async function InvoicePage({ params }: { params: Promise<{ id: st
             <h1 className="text-3xl font-extrabold text-teal tracking-tight">MaaShine Services</h1>
             <p className="text-sage text-sm mt-1">Professional Cleaning Solutions</p>
             <p className="text-slate-500 text-sm mt-4">
-              contact@maashineservices.com<br />
-              +91 81056 99620
+              rajath.raj2569@gmail.com<br />
+              +91 99168 87855
             </p>
           </div>
           <div className="text-right">

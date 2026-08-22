@@ -6,9 +6,24 @@ import WhatsAppCTA from '../components/WhatsAppCTA'
 import PhoneCTA from '../components/PhoneCTA'
 import ServiceAreas from '../components/ServiceAreas'
 import ShareMaaShine from '../components/ShareMaaShine'
+import FAQ, { FAQ_ITEMS } from '../components/FAQ'
 
 export default async function HomePage() {
   const businessSettings = await getBusinessSettings()
+  
+  // FAQ Schema for SEO
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": FAQ_ITEMS.map((item) => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
+      }
+    }))
+  }
   
   // Fetch real verified public reviews if any exist
   let reviews: any[] = []
@@ -27,6 +42,10 @@ export default async function HomePage() {
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       {/* Hero Section */}
       <section className="bg-linen pt-16 pb-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-teal via-linen to-linen pointer-events-none" />
@@ -169,6 +188,9 @@ export default async function HomePage() {
 
       {/* Service Areas in Mysore */}
       <ServiceAreas />
+
+      {/* Frequently Asked Questions */}
+      <FAQ />
 
       {/* Authentic Reviews Section */}
       <section className="bg-linen/40 py-20 px-4 sm:px-6 lg:px-8">

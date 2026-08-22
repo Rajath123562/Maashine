@@ -33,7 +33,11 @@ export default function Navbar({ user, profile }: { user: any, profile: any }) {
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map(link => (
-              <Link key={link.href} href={link.href} className={`text-sm font-bold ${pathname === link.href ? 'text-teal' : 'text-ink hover:text-teal'} transition-colors`}>
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-sm font-bold ${pathname === link.href ? 'text-teal' : 'text-ink hover:text-teal'} transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal rounded-md px-1 py-0.5`}
+              >
                 {link.label}
               </Link>
             ))}
@@ -42,19 +46,35 @@ export default function Navbar({ user, profile }: { user: any, profile: any }) {
             
             {user ? (
               <div className="flex items-center gap-3">
-                <Link href={profile?.role === 'admin' ? '/admin' : '/dashboard'} className="bg-teal text-white font-bold px-6 py-2.5 rounded-full hover:bg-teal/90 transition-colors shadow-sm">
+                <Link
+                  href={profile?.role === 'admin' ? '/admin' : '/dashboard'}
+                  className="bg-teal text-white font-bold px-6 py-2.5 rounded-full hover:bg-teal/90 transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+                >
                   Dashboard
                 </Link>
                 <form action={logout}>
-                  <button type="submit" className="text-sage hover:text-red-500 transition-colors p-2 rounded-full hover:bg-red-50" title="Log out">
+                  <button
+                    type="submit"
+                    className="text-sage hover:text-red-500 transition-colors p-2 rounded-full hover:bg-red-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
+                    title="Log out"
+                    aria-label="Log out of account"
+                  >
                     <LogOut size={20} />
                   </button>
                 </form>
               </div>
             ) : (
               <div className="flex items-center space-x-4">
-                <Link href="/login" className="text-ink font-bold hover:text-teal transition-colors">Log in</Link>
-                <Link href="/register" className="bg-lime text-ink font-bold px-6 py-2.5 rounded-full hover:bg-marigold transition-colors shadow-sm">
+                <Link
+                  href="/login"
+                  className="text-ink font-bold hover:text-teal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal rounded-md px-2 py-1"
+                >
+                  Log in
+                </Link>
+                <Link
+                  href="/register"
+                  className="bg-lime text-ink font-bold px-6 py-2.5 rounded-full hover:bg-marigold transition-colors shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+                >
                   Sign Up
                 </Link>
               </div>
@@ -63,7 +83,14 @@ export default function Navbar({ user, profile }: { user: any, profile: any }) {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-ink hover:text-teal focus:outline-none">
+            <button
+              type="button"
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-ink hover:text-teal p-2 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal transition-colors"
+              aria-label={isOpen ? "Close main navigation menu" : "Open main navigation menu"}
+              aria-expanded={isOpen}
+              aria-controls="mobile-nav-menu"
+            >
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
@@ -72,28 +99,54 @@ export default function Navbar({ user, profile }: { user: any, profile: any }) {
 
       {/* Mobile Nav */}
       {isOpen && (
-        <div className="md:hidden bg-white border-b border-sage/20 px-4 pt-2 pb-6 space-y-2 shadow-xl absolute w-full">
+        <div id="mobile-nav-menu" className="md:hidden bg-white border-b border-sage/20 px-4 pt-2 pb-6 space-y-2 shadow-xl absolute w-full">
           {navLinks.map(link => (
-            <Link key={link.href} href={link.href} onClick={() => setIsOpen(false)} className="block px-3 py-3 rounded-md text-base font-bold text-ink hover:text-teal hover:bg-linen transition-colors">
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className="block px-3 py-3 rounded-md text-base font-bold text-ink hover:text-teal hover:bg-linen transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+            >
               {link.label}
             </Link>
           ))}
           <div className="border-t border-sage/20 pt-4 mt-2">
             {user ? (
               <div className="flex flex-col gap-2">
-                <Link href={profile?.role === 'admin' ? '/admin' : '/dashboard'} onClick={() => setIsOpen(false)} className="block w-full text-center bg-teal text-white font-bold px-6 py-3 rounded-xl hover:bg-teal/90 transition-colors">
+                <Link
+                  href={profile?.role === 'admin' ? '/admin' : '/dashboard'}
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full text-center bg-teal text-white font-bold px-6 py-3 rounded-xl hover:bg-teal/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+                >
                   Dashboard
                 </Link>
                 <form action={logout}>
-                  <button type="submit" onClick={() => setIsOpen(false)} className="block w-full text-center bg-red-50 text-red-500 font-bold px-6 py-3 rounded-xl hover:bg-red-100 transition-colors">
+                  <button
+                    type="submit"
+                    onClick={() => setIsOpen(false)}
+                    className="block w-full text-center bg-red-50 text-red-500 font-bold px-6 py-3 rounded-xl hover:bg-red-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400"
+                    aria-label="Log out of account"
+                  >
                     Log Out
                   </button>
                 </form>
               </div>
             ) : (
                <div className="flex flex-col gap-2">
-                <Link href="/login" onClick={() => setIsOpen(false)} className="block w-full text-center bg-linen text-ink font-bold px-6 py-3 rounded-xl transition-colors">Log in</Link>
-                <Link href="/register" onClick={() => setIsOpen(false)} className="block w-full text-center bg-lime text-ink font-bold px-6 py-3 rounded-xl transition-colors">Sign Up</Link>
+                <Link
+                  href="/login"
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full text-center bg-linen text-ink font-bold px-6 py-3 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+                >
+                  Log in
+                </Link>
+                <Link
+                  href="/register"
+                  onClick={() => setIsOpen(false)}
+                  className="block w-full text-center bg-lime text-ink font-bold px-6 py-3 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
+                >
+                  Sign Up
+                </Link>
                </div>
             )}
           </div>

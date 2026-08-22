@@ -19,7 +19,7 @@ export default function ServiceCatalogue({ services }: { services: any[] }) {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
-            className={`px-6 py-2 rounded-full font-bold transition-all ${
+            className={`px-6 py-2 rounded-full font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal ${
               activeCategory === cat 
                 ? 'bg-teal text-white shadow-md' 
                 : 'bg-white text-sage hover:bg-linen border border-sage/20'
@@ -72,13 +72,13 @@ export default function ServiceCatalogue({ services }: { services: any[] }) {
               <div className="flex flex-col gap-2 items-end">
                 <Link 
                   href={`/services/${service.slug}`}
-                  className="text-teal font-bold text-sm hover:underline"
+                  className="text-teal font-bold text-sm hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal rounded"
                 >
                   View Details
                 </Link>
                 <Link 
                   href={`/booking`}
-                  className="bg-lime text-ink font-bold px-6 py-3 rounded-full hover:bg-marigold transition-colors shadow-sm text-sm"
+                  className="bg-lime text-ink font-bold px-6 py-3 rounded-full hover:bg-marigold transition-colors shadow-sm text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal"
                 >
                   {service.pricing_type === 'quote' ? 'Get Quote' : 'Book Now'}
                 </Link>

@@ -99,11 +99,25 @@ export default async function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-sage/20 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-medium text-sage/70">
+        <div className="border-t border-sage/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-medium text-sage/70">
           <p>&copy; {new Date().getFullYear()} {settings.business_name || 'MaaShine Cleaning Services'}. All rights reserved.</p>
-          <p className="mt-2 md:mt-0 text-slate-400">
-            Professional Cleaning Services in Mysore, Karnataka.
-          </p>
+          <div className="flex flex-wrap items-center justify-center gap-6 text-slate-400">
+            <Link
+              href="/privacy"
+              className="hover:text-teal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal rounded"
+            >
+              Privacy Policy
+            </Link>
+            <span>•</span>
+            <Link
+              href="/terms"
+              className="hover:text-teal transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal rounded"
+            >
+              Terms of Service
+            </Link>
+            <span>•</span>
+            <span>Professional Cleaning in Mysore, KA</span>
+          </div>
         </div>
       </div>
     </footer>

@@ -101,7 +101,7 @@ Setting up a free Google Business Profile ensures MaaShine appears in Google Map
 4. **Service-Area Configuration:** Select **"Yes, I deliver services to customers at their location"**.
 5. **Add Service Areas in Mysore:**
    - Gokulam, Vijayanagar, Jayalakshmipuram, Kuvempunagar, VV Mohalla, Saraswathipuram, Hebbal, JP Nagar, Dattagalli, Bogadi, Yadavagiri, Siddhartha Layout.
-6. **Contact Information:** Add phone number (`+91 81056 99620`), website (`https://maashineservices.com`), and booking link (`https://maashineservices.com/booking`).
+6. **Contact Information:** Add phone number (`+91 99168 87855`), website (`https://maashineservices.com`), and booking link (`https://maashineservices.com/booking`).
 7. **Business Hours:** Set Mon–Sat, 9:00 AM – 6:00 PM.
 8. **Add Photos:** Upload high-resolution photos of cleaning gear, staff uniforms, and authentic before/after transformations.
 9. **Capture Customer Reviews:** After every completed job, share your Google review link with the customer. 10+ reviews dramatically boost local map ranking.

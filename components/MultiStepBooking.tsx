@@ -94,9 +94,13 @@ export default function MultiStepBooking({ services, profile, businessSettings }
   return (
     <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-sage/20">
       {/* Progress Bar */}
-      <div className="flex border-b border-sage/20 bg-linen/50">
+      <div className="flex border-b border-sage/20 bg-linen/50" role="progressbar" aria-valuenow={step} aria-valuemin={1} aria-valuemax={6} aria-label={`Booking progress: step ${step} of 6`}>
         {[1, 2, 3, 4, 5, 6].map(i => (
-          <div key={i} className={`flex-1 h-2 ${step >= i ? 'bg-teal' : 'bg-sage/20'} transition-colors`} />
+          <div
+            key={i}
+            aria-current={step === i ? "step" : undefined}
+            className={`flex-1 h-2 ${step >= i ? 'bg-teal' : 'bg-sage/20'} transition-colors`}
+          />
         ))}
       </div>
 
@@ -259,7 +263,7 @@ export default function MultiStepBooking({ services, profile, businessSettings }
                 {needsQuote ? 'Step 6: Review Quote Request' : 'Step 6: Review & Payment'}
               </h2>
               
-              <div className="bg-linen p-6 rounded-2xl border border-sage/20 space-y-4">
+              <div className="bg-linen p-6 rounded-2xl border border-sage/20 space-y-4" aria-live="polite">
                 <div className="flex justify-between border-b border-sage/20 pb-2">
                   <span className="font-semibold text-sage">Service</span>
                   <span className="font-bold text-ink">{selectedService?.name}</span>

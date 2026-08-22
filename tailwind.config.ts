@@ -17,8 +17,8 @@ const config: Config = {
         ink: '#1e293b',
       },
       fontFamily: {
-        sans: ['var(--font-bricolage-grotesque)'],
-        mono: ['var(--font-ibm-plex-mono)'],
+        sans: ['var(--font-bricolage)'],
+        mono: ['var(--font-plex-mono)'],
       }
     },
   },

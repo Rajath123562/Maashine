@@ -89,5 +89,5 @@
 
 ### Contact Copy (`/contact`)
 - **Address**: #610, 8th Main, 12th Cross, Near Hemavathi School, Mysore, Karnataka
-- **Phone**: +91 81056 99620 (Mon–Sat, 9AM–6PM)
+- **Phone**: +91 99168 87855 (Mon–Sat, 9AM–6PM)
 - **Email**: rajath.raj2569@gmail.com

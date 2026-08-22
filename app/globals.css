@@ -7,8 +7,8 @@
   --color-sage: #9ca3af;
   --color-linen: #fdf8f6;
   --color-ink: #1e293b;
-  --font-sans: var(--font-bricolage-grotesque);
-  --font-mono: var(--font-ibm-plex-mono);
+  --font-sans: var(--font-bricolage);
+  --font-mono: var(--font-plex-mono);
 }
 
 @layer base {
@@ -23,5 +23,14 @@
     font-weight: bold;
     letter-spacing: -0.025em;
     color: var(--color-ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
